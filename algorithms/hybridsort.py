@@ -1,5 +1,9 @@
+import sys
+from algorithms import insertionsort
+sys.setrecursionlimit(5000)
+## Adapted from:
 ## https://www.geeksforgeeks.org/python-program-for-quicksort/
-## Python program for implementation of Quicksort Sort 
+## Python program for implementation of HybridSort 
   
 # This function takes last element as pivot, places 
 # the pivot element at its correct position in sorted 
@@ -29,14 +33,24 @@ def partition(arr,low,high):
 # high  --> Ending index 
   
 # Function to do Quick sort 
-def QuickSort(arr,low,high): 
-    if low < high: 
+def HybridSort(arr,low,high):
+
+    if low >= high:
+        return
+
+    #   If our partition <= 50
+    elif( high - low < 10):
+        #   Switch over to insertion sort
+        insertionsort.InsertionSort(arr)
+
+
+    elif low < high: 
   
         # pi is partitioning index, arr[p] is now 
         # at right place 
+        
         pi = partition(arr,low,high) 
-  
         # Separately sort elements before 
         # partition and after partition 
-        QuickSort(arr, low, pi-1) 
-        QuickSort(arr, pi+1, high)
+        HybridSort(arr, low, pi-1) 
+        HybridSort(arr, pi+1, high) 
